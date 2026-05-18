@@ -1,14 +1,14 @@
-# Inline Russian-to-English Translator Script
+# Inline Russian Text Grabber & Translator Script
 
-A lightweight, zero-dependency JavaScript snippet designed to run directly in your browser's developer console. When you highlight any Russian text on a webpage, a floating tooltip instantly displays the English translation along with a quick-copy utility.
+A lightweight, zero-dependency JavaScript snippet designed to run directly in your browser's developer console. When you highlight any Russian text on a webpage, a floating tooltip instantly displays the English translation and provides a quick-copy utility to grab the **original Russian text** to your clipboard.
 
 ## Implementation Guide
 
 1. **Copy the Code Block** below using the copy button in the top-right corner of the block.
-2. Open the webpage containing the text you wish to translate.
+2. Open the webpage containing the text you wish to translate and copy.
 3. Press `F12` (or right-click and select **Inspect**) to open Developer Tools, then click the **Console** tab.
 4. Paste the code into the command line and press `Enter`.
-5. Highlight any Russian word or phrase to see the translation.
+5. Highlight any Russian word or phrase to activate the utility.
 
 ```javascript
 (function() {
@@ -55,18 +55,18 @@ A lightweight, zero-dependency JavaScript snippet designed to run directly in yo
             if (data.responseData && data.responseData.translatedText) {
                 currentTranslation = data.responseData.translatedText;
                 
-                // Update UI with translation and a copy button
+                // Update UI with translation and a button configured to copy the original Russian text
                 box.innerHTML = `
                     <div style="margin-bottom: 8px;"><strong>Original:</strong> ${selectedText}</div>
                     <div style="margin-bottom: 8px;"><strong>Translation:</strong> ${currentTranslation}</div>
-                    <button id="copy-btn" style="background: #89b4fa; color: #11111b; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-weight: bold; width: 100%;">Copy Translation</button>
+                    <button id="copy-btn" style="background: #89b4fa; color: #11111b; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-weight: bold; width: 100%;">Copy Russian Text</button>
                 `;
 
-                // Add copy functionality
+                // Add copy functionality targeting the original text
                 document.getElementById('copy-btn').addEventListener('click', () => {
-                    navigator.clipboard.writeText(currentTranslation).then(() => {
+                    navigator.clipboard.writeText(selectedText).then(() => {
                         const btn = document.getElementById('copy-btn');
-                        btn.innerText = 'Copied!';
+                        btn.innerText = 'Russian Copied!';
                         btn.style.background = '#a6e3a1';
                         setTimeout(() => box.style.display = 'none', 800);
                     }).catch(err => {
@@ -89,5 +89,5 @@ A lightweight, zero-dependency JavaScript snippet designed to run directly in yo
         }
     });
 
-    console.log("%c🇷🇺 Russian Live Translator Loaded! Highlight any Russian text to translate.", "color: #89b4fa; font-weight: bold; font-size: 14px;");
+    console.log("%c🇷🇺 Russian Text Grabber Loaded! Highlight any Russian text to translate and copy.", "color: #89b4fa; font-weight: bold; font-size: 14px;");
 })();
