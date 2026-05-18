@@ -1,15 +1,4 @@
-# CSP-Compliant Russian Translator & Phonetic Guide
-
-A lightweight JavaScript utility designed to bypass strict Content Security Policies (like Wikipedia's) by routing translation requests through Google's whitelisted endpoints. It displays the English translation and an instant, locally-computed pronunciation guide with word-final devoicing.
-
-## Implementation Guide
-
-1. **Copy the Code Block** below using the copy button in the top-right corner of the block.
-2. Open your target webpage (works perfectly on Wikipedia/Wiktionary).
-3. Press `F12` (or right-click and select **Inspect**) to open Developer Tools, then click the **Console** tab.
-4. Paste the code into the command line and press `Enter`.
-5. Highlight any Russian word or phrase.
-
+just some code to help learn russian
 ```javascript
 (function () {
     // ── Phonetic engine with word-final devoicing ──────────────────────────
