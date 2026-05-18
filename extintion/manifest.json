@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "Russian Translator & Pronouncer",
+  "version": "1.0",
+  "description": "Translates, transliterates, and pronounces selected Russian text using a floating tooltip.",
+  "permissions": [],
+  "host_permissions": [
+    "https://translate.googleapis.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  }
+}
