@@ -2,7 +2,7 @@ import requests
 import json
 import time
 
-def scrape_and_combine(level="A1"):
+def scrape_and_combine(level="C2"):
     base_url = "https://api2.openrussian.org/api/wordlists/all"
     combined_entries = []
     start = 0
@@ -60,4 +60,4 @@ def scrape_and_combine(level="A1"):
     print(f"Saved {len(combined_entries)} words to {filename}")
 
 if __name__ == "__main__":
-    scrape_and_combine("A1")
+    scrape_and_combine("C2")
