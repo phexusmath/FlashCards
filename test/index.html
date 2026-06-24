@@ -44,9 +44,11 @@
                         <option value="A2">Level A2 (Elementary)</option>
                         <option value="B1">Level B1 (Intermediate)</option>
                         <option value="B2">Level B2 (Upper-Int)</option>
+                        <option value="C1">Level C1 (Advanced)</option>
+                        <option value="C2">Level C2 (Proficient)</option>
                     </select>
                     <select id="fc-batch" onchange="changeBatch()" class="border-0 text-slate-500 text-xs bg-transparent focus:ring-0 font-medium text-right">
-                        </select>
+                    </select>
                 </div>
 
                 <div class="flex-1 flex flex-col items-center justify-center py-4">
@@ -111,7 +113,7 @@
 
             <section id="tab-texts" class="tab-content hidden h-full flex flex-col space-y-4">
                 <div class="bg-white border border-slate-100 p-2 rounded-xl flex space-x-1 shrink-0 overflow-x-auto no-scrollbar" id="text-selector-tabs">
-                    </div>
+                </div>
 
                 <div class="flex-1 bg-white border border-slate-200/70 rounded-2xl p-4 flex flex-col justify-between overflow-hidden shadow-2xs">
                     <div class="flex justify-between items-center border-b border-slate-100 pb-2 mb-3 shrink-0">
@@ -120,7 +122,7 @@
                     </div>
 
                     <div id="reader-body" class="flex-1 overflow-y-auto text-base text-slate-800 leading-relaxed tracking-wide select-none pr-1">
-                        </div>
+                    </div>
 
                     <div id="dictionary-popup" class="mt-3 p-3 bg-slate-900 text-white rounded-xl space-y-1 hidden word-pop shrink-0">
                         <div class="flex justify-between items-center">
@@ -156,7 +158,7 @@
 
     <script>
         // Data Structures Architecture
-        let vocabulary = { A1: [], A2: [], B1: [], B2: [] };
+        let vocabulary = { A1: [], A2: [], B1: [], B2: [], C1: [], C2: [] };
         let currentLevel = 'A1';
         let currentBatchIdx = 0;
         let currentCardIdx = 0;
@@ -171,7 +173,6 @@
             { ru: "Она читает интересную книгу в комнате.", en: "She is reading an interesting book in the room." }
         ];
 
-        // Decent-sized curated library of structured interactive stories and classic children's fairy tales
         const shortTexts = [
             {
                 title: "🐱 Кот и Мышь (The Cat and Mouse)",
@@ -201,14 +202,16 @@
         });
 
         async function loadAllLevels() {
-            const levels = ['A1', 'A2', 'B1', 'B2'];
+            const levels = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
             for (const lvl of levels) {
                 try {
-                    const response = await fetch(`../${lvl.toLowerCase()}_combined.json`);
+                    // Changed path structure to reliably target current local directory folder
+                    const response = await fetch(`./${lvl.toLowerCase()}_combined.json`);
                     if (!response.ok) throw new Error();
                     const data = await response.json();
                     vocabulary[lvl] = data.result.entries || [];
                 } catch (e) {
+                    // Reliable structured backup fallback array mapping layout structure
                     vocabulary[lvl] = [
                         { wordId: 1, bare: "и", level: lvl, translations: ["and"], pos: "conjunction" },
                         { wordId: 3, bare: "не", level: lvl, translations: ["not"], pos: "particle" },
@@ -223,8 +226,10 @@
 
         function buildDictionaryMap() {
             Object.values(vocabulary).flat().forEach(item => {
-                const clearWord = item.bare.toLowerCase().replace(/[́]/g, '');
-                dictionaryMap[clearWord] = item.translations.join(', ');
+                if (item && item.bare && item.translations) {
+                    const clearWord = item.bare.toLowerCase().replace(/[́]/g, '');
+                    dictionaryMap[clearWord] = item.translations.join(', ');
+                }
             });
         }
 
@@ -250,9 +255,11 @@
         // --- FLASHCARDS SYSTEM ---
         function loadFlashcardBatch() {
             currentLevel = document.getElementById('fc-level').value;
-            const words = vocabulary[currentLevel];
+            const words = vocabulary[currentLevel] || [];
             const batchSelect = document.getElementById('fc-batch');
             batchSelect.innerHTML = '';
+
+            if (words.length === 0) return;
 
             const batchCount = Math.ceil(words.length / 10);
             for (let i = 0; i < batchCount; i++) {
@@ -267,13 +274,13 @@
         }
 
         function changeBatch() {
-            currentBatchIdx = parseInt(document.getElementById('fc-batch').value);
+            currentBatchIdx = parseInt(document.getElementById('fc-batch').value) || 0;
             currentCardIdx = 0;
             renderCard();
         }
 
         function renderCard() {
-            const words = vocabulary[currentLevel];
+            const words = vocabulary[currentLevel] || [];
             const actualIndex = (currentBatchIdx * 10) + currentCardIdx;
             const word = words[actualIndex];
             if (!word) return;
@@ -297,7 +304,8 @@
 
         function nextCard() {
             event?.stopPropagation();
-            if (currentCardIdx < 9 && ((currentBatchIdx * 10) + currentCardIdx + 1) < vocabulary[currentLevel].length) {
+            const words = vocabulary[currentLevel] || [];
+            if (currentCardIdx < 9 && ((currentBatchIdx * 10) + currentCardIdx + 1) < words.length) {
                 currentCardIdx++;
                 renderCard();
             }
@@ -340,21 +348,21 @@
             });
         }
 
-        // --- IMMERSIVE INTERACTIVE STORIES AND LOOKUP SYSTEM ---
+        // --- LOOKUP SYSTEM ---
         function setupReaderTexts() {
             const container = document.getElementById('text-selector-tabs');
             container.innerHTML = '';
             shortTexts.forEach((txt, idx) => {
                 const btn = document.createElement('button');
                 btn.className = `shrink-0 px-3 py-1.5 rounded-lg text-xs font-bold transition whitespace-nowrap ${idx === 0 ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-600'}`;
-                btn.textContent = txt.title.split(' ')[0] + ' ' + txt.title.split(' ')[1]; // Short icon title tag
+                btn.textContent = txt.title.split(' ')[0] + ' ' + txt.title.split(' ')[1];
                 btn.onclick = (e) => {
                     document.querySelectorAll('#text-selector-tabs button').forEach(b => {
-                        b.classList.replace('bg-indigo-600', 'bg-slate-100');
-                        b.classList.replace('text-white', 'text-slate-600');
+                        b.classList.remove('bg-indigo-600', 'text-white');
+                        b.classList.add('bg-slate-100', 'text-slate-600');
                     });
-                    btn.classList.replace('bg-slate-100', 'bg-indigo-600');
-                    btn.classList.replace('text-slate-600', 'text-white');
+                    btn.classList.remove('bg-slate-100', 'text-slate-600');
+                    btn.classList.add('bg-indigo-600', 'text-white');
                     loadReaderText(idx);
                 };
                 container.appendChild(btn);
@@ -413,5 +421,3 @@
     </script>
 </body>
 </html>
-
-```
