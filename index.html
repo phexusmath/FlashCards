@@ -434,7 +434,6 @@
         </div>
 
         <div class="box phrase-card" id="phrase-card">
-            <span class="tag" id="ph-ai-tag" style="position: absolute; top: 12px; left: 14px; display: none;">✨ AI</span>
             <div class="phrase-words" id="phrase-words"></div>
             <div class="phrase-en hidden-en" id="phrase-en"></div>
         </div>
@@ -444,22 +443,7 @@
             <button class="btn" id="reveal-btn" onclick="revealPhrase()">👁 Reveal</button>
             <button class="btn btn-red" onclick="nextPhrase(true)">Next →</button>
         </div>
-
-        <details class="box" id="ai-box" style="padding: 14px 18px;">
-            <summary style="cursor: pointer; font-weight: 700;">∞ Endless AI sentences <span class="hint">· built from your weak words</span></summary>
-            <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 12px;">
-                <input type="password" id="ai-key" class="type-input" style="text-align: left;" placeholder="Anthropic API key (sk-ant-...)" autocomplete="off">
-                <div class="row">
-                    <select id="ai-model" style="flex: 1;">
-                        <option value="claude-opus-4-8">Opus 4.8 · best quality</option>
-                        <option value="claude-sonnet-5">Sonnet 5 · balanced</option>
-                        <option value="claude-haiku-4-5">Haiku 4.5 · cheapest</option>
-                    </select>
-                    <button class="btn btn-gold" id="ai-generate" onclick="generateAiPhrases()">✨ Generate 10</button>
-                </div>
-                <p class="hint" style="margin: 0;">Sentences target the words you're struggling with in Learn, at the selected level, and are saved on this device forever. The key stays in this browser and is sent only to api.anthropic.com. A batch costs roughly 2¢ on Opus, ~1¢ on Sonnet, &lt;½¢ on Haiku. Get a key at console.anthropic.com.</p>
-            </div>
-        </details>
+        <p class="hint" style="text-align: center; margin: 0;">Sentences from tatoeba.org (CC-BY)</p>
     </section>
 
     <!-- ==================== STORIES ==================== -->
@@ -542,98 +526,24 @@ const ROUND_SIZE = 10;
 const MAX_NEW_PER_ROUND = 5;
 const INTERVALS = [0, 4 * HOUR, 1 * DAY, 3 * DAY, 7 * DAY, 16 * DAY, 35 * DAY];
 const LEARNED_BOX = 3;
-const XP_PHRASE = 3, XP_STORY = 15;
+const XP_PHRASE = 3, XP_STORY = 15, XP_WIKI = 5;
 
 let allDecks = { a1: [], a2: [], b1: [], b2: [], c1: [], c2: [] };
+let TATOEBA = { a1: [], a2: [], b1: [] }; // free CC-BY sentence bank, loaded from tatoeba_sentences.json
 let dictionaryMap = {};   // bare (no stress) -> { t, lvl, pos, accented }
 let currentLevel = 'a1';
 
-const PHRASES = {
-    a1: [
-        { ru: "Э́то мой но́вый дом.", en: "This is my new house." },
-        { ru: "Я иду́ домо́й.", en: "I am going home." },
-        { ru: "Она́ лю́бит чай.", en: "She loves tea." },
-        { ru: "У меня́ есть ко́шка.", en: "I have a cat." },
-        { ru: "Мы живём в го́роде.", en: "We live in the city." },
-        { ru: "Сего́дня хоро́шая пого́да.", en: "The weather is nice today." },
-        { ru: "Я не зна́ю, где он.", en: "I don't know where he is." },
-        { ru: "Он рабо́тает ка́ждый день.", en: "He works every day." },
-        { ru: "Что ты хо́чешь есть?", en: "What do you want to eat?" },
-        { ru: "За́втра мы е́дем в Москву́.", en: "Tomorrow we are going to Moscow." },
-        { ru: "Мне нра́вится э́та кни́га.", en: "I like this book." },
-        { ru: "Вода́ в реке́ холо́дная.", en: "The water in the river is cold." },
-        { ru: "Мой брат смо́трит фильм.", en: "My brother is watching a movie." },
-        { ru: "Ве́чером я чита́ю до́ма.", en: "In the evening I read at home." },
-        { ru: "Где нахо́дится вокза́л?", en: "Where is the train station?" },
-        { ru: "Я пью во́ду ка́ждое у́тро.", en: "I drink water every morning." },
-        { ru: "Э́то о́чень большо́й го́род.", en: "This is a very big city." },
-        { ru: "Мой оте́ц чита́ет газе́ту.", en: "My father is reading the newspaper." },
-        { ru: "Де́ти игра́ют в па́рке.", en: "The children are playing in the park." },
-        { ru: "Я люблю́ свою́ семью́.", en: "I love my family." },
-        { ru: "У нас есть ма́ленький дом.", en: "We have a small house." },
-        { ru: "Она́ идёт в шко́лу.", en: "She is going to school." },
-        { ru: "Он живёт в Москве́.", en: "He lives in Moscow." },
-        { ru: "Мы говори́м по-ру́сски.", en: "We speak Russian." },
-        { ru: "Ко́шка спит на столе́.", en: "The cat is sleeping on the table." },
-        { ru: "Я хочу́ купи́ть хлеб.", en: "I want to buy bread." },
-        { ru: "Кто э́тот челове́к?", en: "Who is this person?" },
-        { ru: "Моя́ ма́ма гото́вит у́жин.", en: "My mom is cooking dinner." },
-        { ru: "Ве́чером мы смо́трим телеви́зор.", en: "In the evening we watch TV." }
-    ],
-    a2: [
-        { ru: "Я хорошо́ зна́ю э́тот краси́вый го́род.", en: "I know this beautiful city well." },
-        { ru: "Мой друг говори́т по-ру́сски о́чень бы́стро.", en: "My friend speaks Russian very fast." },
-        { ru: "Она́ чита́ет интере́сную кни́гу в ко́мнате.", en: "She is reading an interesting book in the room." },
-        { ru: "Е́сли за́втра бу́дет дождь, мы оста́немся до́ма.", en: "If it rains tomorrow, we will stay home." },
-        { ru: "Мне ну́жно купи́ть проду́кты на у́жин.", en: "I need to buy groceries for dinner." },
-        { ru: "Он ча́сто е́здит на рабо́ту на авто́бусе.", en: "He often takes the bus to work." },
-        { ru: "Ле́том мы лю́бим отдыха́ть на мо́ре.", en: "In summer we like to vacation at the sea." },
-        { ru: "Вчера́ ве́чером я до́лго разгова́ривал с бра́том.", en: "Last night I talked with my brother for a long time." },
-        { ru: "Ско́лько сто́ит э́та си́няя ку́ртка?", en: "How much does this blue jacket cost?" },
-        { ru: "Я забы́л свой телефо́н до́ма.", en: "I forgot my phone at home." },
-        { ru: "Мы пригласи́ли друзе́й на день рожде́ния.", en: "We invited friends to the birthday party." },
-        { ru: "Э́тот рестора́н открыва́ется в де́вять часо́в.", en: "This restaurant opens at nine o'clock." },
-        { ru: "Мне тру́дно встава́ть ра́но у́тром.", en: "It's hard for me to get up early in the morning." },
-        { ru: "Она́ у́чится в университе́те два го́да.", en: "She has been studying at the university for two years." },
-        { ru: "Ка́ждое у́тро я е́ду на рабо́ту на метро́.", en: "Every morning I take the metro to work." },
-        { ru: "Мне нра́вится гуля́ть по го́роду ве́чером.", en: "I like to walk around the city in the evening." },
-        { ru: "Он не мо́жет найти́ свои́ ключи́.", en: "He cannot find his keys." },
-        { ru: "В суббо́ту мы пойдём в кино́.", en: "On Saturday we will go to the movies." },
-        { ru: "Она́ пригото́вила о́чень вку́сный суп.", en: "She made a very tasty soup." },
-        { ru: "Извини́те, вы не зна́ете, где апте́ка?", en: "Excuse me, do you know where the pharmacy is?" },
-        { ru: "Зимо́й здесь о́чень хо́лодно.", en: "In winter it is very cold here." },
-        { ru: "Я ещё не чита́л э́ту кни́гу.", en: "I haven't read this book yet." },
-        { ru: "Мой брат ста́рше меня́ на три го́да.", en: "My brother is three years older than me." },
-        { ru: "Мы до́лго жда́ли авто́бус.", en: "We waited for the bus for a long time." },
-        { ru: "Она́ хо́чет стать врачо́м.", en: "She wants to become a doctor." },
-        { ru: "Дава́й встре́тимся за́втра у́тром.", en: "Let's meet tomorrow morning." },
-        { ru: "Э́то са́мый краси́вый парк в на́шем го́роде.", en: "This is the most beautiful park in our city." }
-    ],
-    b1: [
-        { ru: "Я счита́ю, что изуча́ть языки́ о́чень поле́зно.", en: "I believe that learning languages is very useful." },
-        { ru: "Когда́ я был ребёнком, мы ка́ждое ле́то е́здили к ба́бушке.", en: "When I was a child, we went to grandma's every summer." },
-        { ru: "Он предложи́л встре́титься в це́нтре го́рода.", en: "He suggested meeting in the city center." },
-        { ru: "Несмотря́ на плоху́ю пого́ду, мы пошли́ гуля́ть.", en: "Despite the bad weather, we went for a walk." },
-        { ru: "Мне пришло́сь до́лго ждать авто́буса под дождём.", en: "I had to wait a long time for the bus in the rain." },
-        { ru: "Е́сли бы у меня́ бы́ло бо́льше вре́мени, я бы чита́л ка́ждый день.", en: "If I had more time, I would read every day." },
-        { ru: "Она́ рассказа́ла нам удиви́тельную исто́рию о свое́й пое́здке.", en: "She told us an amazing story about her trip." },
-        { ru: "Что́бы говори́ть свобо́дно, ну́жно мно́го пра́ктики.", en: "To speak fluently, you need a lot of practice." },
-        { ru: "Я то́лько что верну́лся из о́тпуска и чу́вствую себя́ отли́чно.", en: "I just returned from vacation and feel great." },
-        { ru: "Возмо́жно, в бу́дущем мы перее́дем в другу́ю страну́.", en: "Perhaps in the future we will move to another country." },
-        { ru: "Он так уста́л, что засну́л пе́ред телеви́зором.", en: "He was so tired that he fell asleep in front of the TV." },
-        { ru: "В э́том магази́не мо́жно найти́ всё, что ну́жно для до́ма.", en: "In this store you can find everything you need for the home." },
-        { ru: "Я не уве́рен, что э́то хоро́шая иде́я.", en: "I'm not sure that this is a good idea." },
-        { ru: "Ей пришло́сь отмени́ть пое́здку из-за боле́зни.", en: "She had to cancel the trip because of illness." },
-        { ru: "Чем бо́льше я чита́ю по-ру́сски, тем ле́гче стано́вится.", en: "The more I read in Russian, the easier it gets." },
-        { ru: "Он спроси́л, могу́ ли я ему́ помо́чь.", en: "He asked whether I could help him." },
-        { ru: "К сожале́нию, биле́тов уже́ не́ было.", en: "Unfortunately, there were no tickets left." },
-        { ru: "Мы обсуди́ли пла́ны на сле́дующий год.", en: "We discussed plans for the next year." },
-        { ru: "Е́сли ты уста́л, отдохни́ немно́го.", en: "If you're tired, rest a little." },
-        { ru: "Я привы́к встава́ть ра́но, да́же в выходны́е.", en: "I'm used to getting up early, even on weekends." },
-        { ru: "Никто́ не знал, почему́ он ушёл так ра́но.", en: "Nobody knew why he left so early." },
-        { ru: "С ка́ждым днём мой ру́сский стано́вится лу́чше.", en: "My Russian gets better every day." }
-    ]
-};
+// Minimal fallback used only if tatoeba_sentences.json fails to load
+const FALLBACK_PHRASES = [
+    { ru: "Э́то мой но́вый дом.", en: "This is my new house." },
+    { ru: "Я иду́ домо́й.", en: "I am going home." },
+    { ru: "Она́ лю́бит чай.", en: "She loves tea." },
+    { ru: "У меня́ есть ко́шка.", en: "I have a cat." },
+    { ru: "Мы живём в го́роде.", en: "We live in the city." },
+    { ru: "Сего́дня хоро́шая пого́да.", en: "The weather is nice today." },
+    { ru: "Он рабо́тает ка́ждый день.", en: "He works every day." },
+    { ru: "Мне нра́вится э́та кни́га.", en: "I like this book." }
+];
 
 const STORIES = [
     {
@@ -671,8 +581,7 @@ function loadState() {
     const defaults = {
         xp: 0, xpToday: 0, streak: 0, lastGoalDay: null,
         today: todayStr(), bestCombo: 0, words: {},
-        readLog: { date: todayStr(), ids: [] },
-        ai: { a1: [], a2: [], b1: [] }
+        readLog: { date: todayStr(), ids: [] }
     };
     try {
         const s = JSON.parse(localStorage.getItem(STORE_KEY));
@@ -683,7 +592,9 @@ function loadState() {
 
 let state = loadState();
 if (!state.readLog || typeof state.readLog !== 'object') state.readLog = { date: todayStr(), ids: [] };
-if (!state.ai || typeof state.ai !== 'object') state.ai = { a1: [], a2: [], b1: [] };
+delete state.ai; // migration: the AI sentence feature was removed
+localStorage.removeItem('ruFlash.apiKey');
+localStorage.removeItem('ruFlash.aiModel');
 
 function saveState() { localStorage.setItem(STORE_KEY, JSON.stringify(state)); }
 
@@ -849,12 +760,13 @@ async function initApp() {
         return;
     }
     buildDictionaryMap();
+    try {
+        const tr = await fetch('tatoeba_sentences.json');
+        if (tr.ok) TATOEBA = await tr.json();
+    } catch (e) { console.warn('No Tatoeba sentence bank found'); }
     rolloverDay();
     onLevelChange('a1');
     renderDashboard();
-    $('ai-key').value = localStorage.getItem('ruFlash.apiKey') || '';
-    const savedModel = localStorage.getItem('ruFlash.aiModel');
-    if (savedModel) $('ai-model').value = savedModel;
     setPhrasePool('a1');
     setupStoryTabs();
     loadStory(0);
@@ -1194,7 +1106,8 @@ let phraseTimers = [];
 const sentenceKeyCache = new Map();
 
 function poolArr() {
-    return PHRASES[phrasePool].concat(state.ai[phrasePool] || []);
+    const arr = TATOEBA[phrasePool] || [];
+    return arr.length ? arr : FALLBACK_PHRASES;
 }
 
 // Which dictionary headwords does a sentence contain? (exact + ending-chop match)
@@ -1278,7 +1191,6 @@ function nextPhrase(givesXp) {
     const p = currentPhrase();
     if (!p) return;
     phraseRevealed = false;
-    $('ph-ai-tag').style.display = p.ai ? 'block' : 'none';
 
     const box = $('phrase-words');
     box.innerHTML = '';
@@ -1298,114 +1210,6 @@ function nextPhrase(givesXp) {
     en.dataset.en = p.en;
 
     if (givesXp !== null) speak(p.ru); // auto-play on user-driven advance
-}
-
-// =========================================================
-//  ∞ AI sentence generation (Claude API, user's own key)
-// =========================================================
-function aiTargetWords() {
-    const deck = allDecks[phrasePool] || [];
-    const now = Date.now();
-    const weak = [], fresh = [];
-    for (const w of deck) {
-        const rec = getRec(phrasePool, w);
-        if (!rec) fresh.push(w);
-        else if (rec.b < LEARNED_BOX || rec.due <= now) weak.push(w);
-    }
-    return weak.concat(fresh).slice(0, 12).map(w => `${w.bare} (${w.majorTranslations[0]})`);
-}
-
-async function generateAiPhrases() {
-    const key = $('ai-key').value.trim();
-    if (!key) { showToast('Paste your Anthropic API key first'); return; }
-    localStorage.setItem('ruFlash.apiKey', key);
-    const model = $('ai-model').value;
-    localStorage.setItem('ruFlash.aiModel', model);
-
-    const btn = $('ai-generate');
-    btn.disabled = true;
-    btn.textContent = '⏳ Generating...';
-    try {
-        const targets = aiTargetWords();
-        const lvl = phrasePool.toUpperCase();
-        const prompt =
-            `Write exactly 10 natural, grammatically correct Russian sentences for a language learner at CEFR level ${lvl}.\n` +
-            `Rules:\n` +
-            `- Use simple vocabulary appropriate for ${lvl}; sentences of 4-10 words.\n` +
-            (targets.length ? `- Each sentence must use at least one of these target words, in any grammatical form: ${targets.join(', ')}.\n` : '') +
-            `- Mark stress in every Russian word of 2+ syllables by placing the combining acute accent (U+0301) directly after the stressed vowel, like "молоко́".\n` +
-            `- Give a natural English translation for each sentence.`;
-
-        const res = await fetch('https://api.anthropic.com/v1/messages', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json',
-                'x-api-key': key,
-                'anthropic-version': '2023-06-01',
-                'anthropic-dangerous-direct-browser-access': 'true'
-            },
-            body: JSON.stringify({
-                model: model,
-                max_tokens: 4000,
-                messages: [{ role: 'user', content: prompt }],
-                output_config: {
-                    format: {
-                        type: 'json_schema',
-                        schema: {
-                            type: 'object',
-                            properties: {
-                                sentences: {
-                                    type: 'array',
-                                    items: {
-                                        type: 'object',
-                                        properties: { ru: { type: 'string' }, en: { type: 'string' } },
-                                        required: ['ru', 'en'],
-                                        additionalProperties: false
-                                    }
-                                }
-                            },
-                            required: ['sentences'],
-                            additionalProperties: false
-                        }
-                    }
-                }
-            })
-        });
-
-        if (!res.ok) {
-            const err = await res.json().catch(() => null);
-            const msg = err && err.error ? err.error.message : 'HTTP ' + res.status;
-            throw new Error(res.status === 401 ? 'Invalid API key' : msg);
-        }
-        const data = await res.json();
-        if (data.stop_reason === 'refusal') throw new Error('The model declined this request.');
-        const textBlock = (data.content || []).find(b => b.type === 'text');
-        if (!textBlock) throw new Error('Empty response from the API.');
-        const items = (JSON.parse(textBlock.text).sentences || [])
-            .filter(s => s && s.ru && s.en)
-            .map(s => ({ ru: s.ru.trim(), en: s.en.trim(), ai: true }));
-        if (items.length === 0) throw new Error('No sentences in the response.');
-
-        state.ai[phrasePool] = (state.ai[phrasePool] || []).concat(items);
-        if (state.ai[phrasePool].length > 400) {
-            state.ai[phrasePool] = state.ai[phrasePool].slice(-400);
-        }
-        saveState();
-
-        // Rebuild the queue with the fresh sentences first
-        buildPhraseOrder();
-        const arr = poolArr();
-        const fresh = new Set(items);
-        phraseOrder.sort((a, b) => (fresh.has(arr[b]) ? 1 : 0) - (fresh.has(arr[a]) ? 1 : 0));
-        phrasePos = -1;
-        nextPhrase(false);
-        showToast(`✨ ${items.length} new sentences added to ${lvl}!`);
-    } catch (e) {
-        showToast('⚠ ' + (e.message || 'Generation failed'));
-    } finally {
-        btn.disabled = false;
-        btn.textContent = '✨ Generate 10';
-    }
 }
 
 function playPhrase() {
@@ -1434,6 +1238,8 @@ function revealPhrase() {
 //  STORIES (tappable graded readers)
 // =========================================================
 let storyIdx = 0;
+let wikiMode = false;
+let readerText = '';
 
 function setupStoryTabs() {
     const wrap = $('story-tabs');
@@ -1449,16 +1255,22 @@ function setupStoryTabs() {
         };
         wrap.appendChild(b);
     });
+    // Wild reading: a random Russian Wikipedia intro (tap it again for another)
+    const wiki = document.createElement('button');
+    wiki.className = 'chip';
+    wiki.textContent = '🌐 Random Wiki';
+    wiki.onclick = () => {
+        for (const c of wrap.children) c.classList.remove('on');
+        wiki.classList.add('on');
+        loadWikipedia();
+    };
+    wrap.appendChild(wiki);
 }
 
-function loadStory(i) {
-    storyIdx = i;
-    const s = STORIES[i];
-    $('reader-title').innerHTML = stressHtml(s.title);
-    $('reader-level').textContent = s.level;
+function renderReaderBody(text) {
     const body = $('reader-body');
     body.innerHTML = '';
-    for (const token of s.body.split(/(\s+)/)) {
+    for (const token of text.split(/(\s+)/)) {
         if (!token.trim()) { body.appendChild(document.createTextNode(token)); continue; }
         const span = document.createElement('span');
         span.className = 'rword stressed';
@@ -1466,6 +1278,16 @@ function loadStory(i) {
         span.onclick = () => lookupWord(token, span);
         body.appendChild(span);
     }
+}
+
+function loadStory(i) {
+    storyIdx = i;
+    wikiMode = false;
+    const s = STORIES[i];
+    readerText = s.body;
+    $('reader-title').innerHTML = stressHtml(s.title);
+    $('reader-level').textContent = s.level;
+    renderReaderBody(s.body);
     const done = state.readLog.date === todayStr() && state.readLog.ids.includes(i);
     const btn = $('story-done-btn');
     btn.disabled = done;
@@ -1473,11 +1295,48 @@ function loadStory(i) {
     closeSheet();
 }
 
+async function loadWikipedia() {
+    wikiMode = true;
+    $('reader-level').textContent = 'WILD';
+    $('reader-title').textContent = 'Загрузка...';
+    $('reader-body').innerHTML = '<span class="hint">Fetching a random Russian article...</span>';
+    const btn = $('story-done-btn');
+    btn.disabled = true;
+    closeSheet();
+    try {
+        let d = null;
+        // A few tries: skip stubs with almost no text
+        for (let attempt = 0; attempt < 3; attempt++) {
+            const res = await fetch('https://ru.wikipedia.org/api/rest_v1/page/random/summary');
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            d = await res.json();
+            if (d.extract && d.extract.length > 120) break;
+        }
+        if (!d || !d.extract) throw new Error('empty');
+        readerText = d.extract;
+        $('reader-title').textContent = d.title || 'Википедия';
+        renderReaderBody(d.extract);
+        btn.disabled = false;
+        btn.textContent = `✓ I read it (+${XP_WIKI} XP)`;
+    } catch (e) {
+        $('reader-title').textContent = 'Википедия';
+        $('reader-body').innerHTML = '<span class="hint">Could not reach Wikipedia — are you offline? Pick a story above instead.</span>';
+    }
+}
+
 function readAloud() {
-    speak(STORIES[storyIdx].body);
+    if (readerText) speak(readerText);
 }
 
 function finishStory() {
+    if (wikiMode) {
+        addXp(XP_WIKI);
+        showToast(`🌐 +${XP_WIKI} XP — tap Random Wiki for another!`);
+        const btn = $('story-done-btn');
+        btn.disabled = true;
+        btn.textContent = '✓ Counted';
+        return;
+    }
     rolloverDay();
     if (state.readLog.date !== todayStr()) state.readLog = { date: todayStr(), ids: [] };
     if (state.readLog.ids.includes(storyIdx)) return;

@@ -1,6 +1,7 @@
-const CACHE_NAME = 'flashcards-v4';
+const CACHE_NAME = 'flashcards-v6';
 const ASSETS = [
   'index.html',
+  'tatoeba_sentences.json',
   'a1_combined.json',
   'a2_combined.json',
   'b1_combined.json',
