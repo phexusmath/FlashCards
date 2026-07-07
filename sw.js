@@ -1,7 +1,6 @@
-const CACHE_NAME = 'flashcards-v1';
+const CACHE_NAME = 'flashcards-v4';
 const ASSETS = [
-  '/',
-  '/index.html',
+  'index.html',
   'a1_combined.json',
   'a2_combined.json',
   'b1_combined.json',
@@ -13,17 +12,30 @@ const ASSETS = [
 // Install the service worker and cache assets
 self.addEventListener('install', (e) => {
   e.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(ASSETS);
-    })
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS))
+  );
+  self.skipWaiting();
+});
+
+// Remove old cache versions so updates actually reach users
+self.addEventListener('activate', (e) => {
+  e.waitUntil(
+    caches.keys().then((keys) =>
+      Promise.all(keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k)))
+    ).then(() => self.clients.claim())
   );
 });
 
-// Fetch assets from cache if offline
+// Network-first, cache fallback: always get the newest version when online,
+// still work fully offline.
 self.addEventListener('fetch', (e) => {
   e.respondWith(
-    caches.match(e.request).then((response) => {
-      return response || fetch(e.request);
-    })
+    fetch(e.request)
+      .then((response) => {
+        const copy = response.clone();
+        caches.open(CACHE_NAME).then((cache) => cache.put(e.request, copy));
+        return response;
+      })
+      .catch(() => caches.match(e.request))
   );
 });
