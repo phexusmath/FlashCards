@@ -1,0 +1,70 @@
+name: Build iOS IPA
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "ios/**"
+      - ".github/workflows/build-ipa.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  build-ipa:
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install XcodeGen
+        run: brew install xcodegen
+
+      - name: Generate Xcode project
+        working-directory: ios
+        run: xcodegen generate
+
+      - name: Build unsigned app
+        working-directory: ios
+        run: |
+          xcodebuild \
+            -project Slovo.xcodeproj \
+            -scheme Slovo \
+            -configuration Release \
+            -sdk iphoneos \
+            -destination 'generic/platform=iOS' \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            CONFIGURATION_BUILD_DIR="$PWD/build" \
+            build
+
+      - name: Package IPA
+        working-directory: ios
+        run: |
+          mkdir -p Payload
+          cp -R build/Slovo.app Payload/
+          zip -qry Slovo-unsigned.ipa Payload
+          ls -la Slovo-unsigned.ipa
+
+      - name: Upload IPA artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Slovo-unsigned-ipa
+          path: ios/Slovo-unsigned.ipa
+          if-no-files-found: error
+
+      # Stable public download URL (artifacts require a GitHub login; releases don't):
+      # https://github.com/<owner>/<repo>/releases/download/ipa-latest/Slovo-unsigned.ipa
+      - name: Publish IPA to the ipa-latest release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ipa-latest
+          name: Слово iOS — latest unsigned IPA
+          body: >
+            Unsigned IPA built from the latest ios/ sources (iOS 16.1+).
+            Sideload with Sideloadly or AltStore using any free Apple ID —
+            they sign it during install. See ios/README.md for steps.
+          prerelease: true
+          make_latest: false
+          files: ios/Slovo-unsigned.ipa
