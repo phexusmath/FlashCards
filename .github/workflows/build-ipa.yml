@@ -27,17 +27,35 @@ jobs:
       - name: Build unsigned app
         working-directory: ios
         run: |
+          set -o pipefail
+          xcodebuild -list -project Slovo.xcodeproj 2>&1 | tee xcodebuild.log
           xcodebuild \
             -project Slovo.xcodeproj \
-            -scheme Slovo \
+            -target Slovo \
             -configuration Release \
             -sdk iphoneos \
-            -destination 'generic/platform=iOS' \
             CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGNING_ALLOWED=NO \
             CONFIGURATION_BUILD_DIR="$PWD/build" \
-            build
+            build 2>&1 | tee -a xcodebuild.log
+
+      # Logs aren't publicly downloadable, but annotations and release assets are —
+      # surface failures through both so they can be diagnosed without repo admin auth.
+      - name: Surface build errors as annotations
+        if: failure()
+        working-directory: ios
+        run: grep -im 10 "error" xcodebuild.log | sed 's/^/::error::/' || true
+
+      - name: Publish build log for debugging
+        if: failure()
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: build-log
+          name: Debug — latest failed xcodebuild log
+          prerelease: true
+          make_latest: false
+          files: ios/xcodebuild.log
 
       - name: Package IPA
         working-directory: ios
