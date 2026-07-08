@@ -181,6 +181,8 @@
         width: 40px; height: 40px; border-radius: 50%;
         background: var(--card-raised); border: 1px solid var(--line);
         color: var(--gold); font-size: 1.1rem; cursor: pointer;
+        display: flex; align-items: center; justify-content: center;
+        padding: 0; line-height: 1;
     }
     .reveal-answer { min-height: 1.5em; margin-top: 12px; text-align: center; font-weight: 700; font-size: 1.1rem; color: var(--green); }
 
@@ -1388,8 +1390,8 @@ function lookupWord(rawToken, el) {
     const seq = ++lookupSeq; // invalidates any translate request still in flight
     if (wikiMode && el && el.closest('#reader-body')) {
         wikiLookup(word, seq);
-    } else {
-        showDictSheet(word);
+    } else if (!showDictSheet(word)) {
+        missLookup(word, seq); // not in the decks — ask Google Translate
     }
     $('sheet').classList.add('open');
     speak(word);
@@ -1404,8 +1406,24 @@ function showDictSheet(word) {
         $('sheet-def').textContent = hit.entry.t;
         $('sheet-meta').innerHTML = `<span class="tag">${hit.entry.lvl}</span> <span class="hint">${hit.entry.pos || ''}${hit.fuzzy ? ' · closest dictionary match for “' + escapeHtml(word) + '”' : ''}</span>`;
         sheetWordText = stripStress(hit.entry.accented);
-    } else {
-        $('sheet-word').textContent = word;
+        return true;
+    }
+    $('sheet-word').textContent = word;
+    $('sheet-def').textContent = 'Not in the frequency lists — probably a name or a rare form.';
+    $('sheet-meta').innerHTML = '';
+    return false;
+}
+
+// Deck miss (a name or a rare form): try Google Translate before giving up
+async function missLookup(word, seq) {
+    $('sheet-def').textContent = 'Not in the decks — translating…';
+    try {
+        const { main, extra } = await googleTranslate(word);
+        if (seq !== lookupSeq) return;
+        $('sheet-def').textContent = main;
+        $('sheet-meta').innerHTML = `<span class="tag">Google</span> <span class="hint">${escapeHtml(extra)}</span>`;
+    } catch (e) {
+        if (seq !== lookupSeq) return;
         $('sheet-def').textContent = 'Not in the frequency lists — probably a name or a rare form.';
         $('sheet-meta').innerHTML = '';
     }
