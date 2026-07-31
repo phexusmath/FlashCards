@@ -1,0 +1,1420 @@
+{
+    "result": {
+        "total": 83,
+        "entries": [
+            {
+                "wordId": 1,
+                "rank": 1,
+                "bare": "и",
+                "accented": "и",
+                "level": "A1",
+                "translations": [
+                    "and"
+                ],
+                "majorTranslations": [
+                    "and"
+                ],
+                "linked": true,
+                "pos": "other",
+                "props": {}
+            },
+            {
+                "wordId": 3,
+                "rank": 2,
+                "bare": "не",
+                "accented": "не",
+                "level": "A1",
+                "translations": [
+                    "not"
+                ],
+                "majorTranslations": [
+                    "not"
+                ],
+                "linked": true,
+                "pos": "other",
+                "props": {}
+            },
+            {
+                "wordId": 7,
+                "rank": 3,
+                "bare": "что",
+                "accented": "что",
+                "level": "A1",
+                "translations": [
+                    "what",
+                    "that"
+                ],
+                "majorTranslations": [
+                    "what",
+                    "that"
+                ],
+                "linked": true,
+                "pos": "pronoun",
+                "props": {}
+            },
+            {
+                "wordId": 10,
+                "rank": 4,
+                "bare": "с",
+                "accented": "с",
+                "level": "A1",
+                "translations": [
+                    "with",
+                    "from, in the course of",
+                    "since",
+                    "off, remove from",
+                    "against",
+                    "about (indicating approximate time or number)"
+                ],
+                "majorTranslations": [
+                    "with",
+                    "from",
+                    "since",
+                    "off",
+                    "against",
+                    "about (indicating approximate time or number)"
+                ],
+                "linked": true,
+                "pos": "other",
+                "props": {}
+            },
+            {
+                "wordId": 13,
+                "rank": 5,
+                "bare": "это",
+                "accented": "э'то",
+                "level": "A1",
+                "translations": [
+                    "this is, that is"
+                ],
+                "majorTranslations": [
+                    "this is"
+                ],
+                "linked": true,
+                "pos": "other",
+                "props": {}
+            },
+            {
+                "wordId": 20,
+                "rank": 6,
+                "bare": "у",
+                "accented": "у",
+                "level": "A1",
+                "translations": [
+                    "(possession)",
+                    "by, at (place)",
+                    "with",
+                    "from (take, borrow)"
+                ],
+                "majorTranslations": [
+                    "(possession)",
+                    "by",
+                    "with",
+                    "from (take"
+                ],
+                "linked": true,
+                "pos": "other",
+                "props": {}
+            },
+            {
+                "wordId": 21,
+                "rank": 7,
+                "bare": "из",
+                "accented": "из",
+                "level": "A1",
+                "translations": [
+                    "from (the inside of)",
+                    "out of"
+                ],
+                "majorTranslations": [
+                    "from (the inside of)",
+                    "out of"
+                ],
+                "linked": true,
+                "pos": "other",
+                "props": {}
+            },
+            {
+                "wordId": 32,
+                "rank": 8,
+                "bare": "мочь",
+                "accented": "мочь",
+                "level": "A1",
+                "translations": [
+                    "to be able to, can"
+                ],
+                "majorTranslations": [
+                    "to be able to"
+                ],
+                "linked": true,
+                "pos": "verb",
+                "props": {}
+            },
+            {
+                "wordId": 34,
+                "rank": 9,
+                "bare": "человек",
+                "accented": "челове'к",
+                "level": "A1",
+                "translations": [
+                    "person",
+                    "human, human being",
+                    "people (collective)",
+                    "guy (colloquial)"
+                ],
+                "majorTranslations": [
+                    "person",
+                    "human",
+                    "people (collective)",
+                    "guy (colloquial)"
+                ],
+                "linked": true,
+                "pos": "noun",
+                "props": {}
+            },
+            {
+                "wordId": 36,
+                "rank": 10,
+                "bare": "ещё",
+                "accented": "ещё",
+                "level": "A1",
+                "translations": [
+                    "still, even, more, else",
+                    "yet, as far back as, as long as ... ago"
+                ],
+                "majorTranslations": [
+                    "still",
+                    "yet"
+                ],
+                "linked": true,
+                "pos": "other",
+                "props": {}
+            },
+            {
+                "wordId": 39,
+                "rank": 11,
+                "bare": "только",
+                "accented": "то'лько",
+                "level": "A1",
+                "translations": [
+                    "only",
+                    "just, simply"
+                ],
+                "majorTranslations": [
+                    "only",
+                    "just"
+                ],
+                "linked": true,
+                "pos": "other",
+                "props": {}
+            },
+            {
+                "wordId": 46,
+                "rank": 12,
+                "bare": "кто",
+                "accented": "кто",
+                "level": "A1",
+                "translations": [
+                    "who?",
+                    "who"
+                ],
+                "majorTranslations": [
+                    "who?",
+                    "who"
+                ],
+                "linked": true,
+                "pos": "pronoun",
+                "props": {}
+            },
+            {
+                "wordId": 48,
+                "rank": 13,
+                "bare": "да",
+                "accented": "да",
+                "level": "A1",
+                "translations": [
+                    "yes",
+                    "but",
+                    "and"
+                ],
+                "majorTranslations": [
+                    "yes",
+                    "but",
+                    "and"
+                ],
+                "linked": true,
+                "pos": "other",
+                "props": {}
+            },
+            {
+                "wordId": 53,
+                "rank": 14,
+                "bare": "говорить",
+                "accented": "говори'ть",
+                "level": "A1",
+                "translations": [
+                    "to speak, to say"
+                ],
+                "majorTranslations": [
+                    "to speak"
+                ],
+                "linked": true,
+                "pos": "verb",
+                "props": {}
+            },
+            {
+                "wordId": 54,
+                "rank": 15,
+                "bare": "или",
+                "accented": "и'ли",
+                "level": "A1",
+                "translations": [
+                    "or"
+                ],
+                "majorTranslations": [
+                    "or"
+                ],
+                "linked": true,
+                "pos": "other",
+                "props": {}
+            },
+            {
+                "wordId": 59,
+                "rank": 16,
+                "bare": "нет",
+                "accented": "нет",
+                "level": "A1",
+                "translations": [
+                    "no",
+                    "not",
+                    "not any, there isn't (any)"
+                ],
+                "majorTranslations": [
+                    "no",
+                    "not",
+                    "not any"
+                ],
+                "linked": true,
+                "pos": "other",
+                "props": {}
+            },
+            {
+                "wordId": 62,
+                "rank": 17,
+                "bare": "большой",
+                "accented": "большо'й",
+                "level": "A1",
+                "translations": [
+                    "big, large, great, important, grown-up"
+                ],
+                "majorTranslations": [
+                    "big"
+                ],
+                "linked": true,
+                "pos": "adjective",
+                "props": {}
+            },
+            {
+                "wordId": 65,
+                "rank": 18,
+                "bare": "другой",
+                "accented": "друго'й",
+                "level": "A1",
+                "translations": [
+                    "other, another, another thing, something else, others, the rest"
+                ],
+                "majorTranslations": [
+                    "other"
+                ],
+                "linked": true,
+                "pos": "pronoun",
+                "props": {}
+            },
+            {
+                "wordId": 69,
+                "rank": 19,
+                "bare": "где",
+                "accented": "где",
+                "level": "A1",
+                "translations": [
+                    "where"
+                ],
+                "majorTranslations": [
+                    "where"
+                ],
+                "linked": true,
+                "pos": "other",
+                "props": {}
+            },
+            {
+                "wordId": 59757,
+                "rank": 20,
+                "bare": "есть",
+                "accented": "есть",
+                "level": "A1",
+                "translations": [
+                    "there is, there are, eats"
+                ],
+                "majorTranslations": [
+                    "there is"
+                ],
+                "linked": true,
+                "pos": "other",
+                "props": {}
+            },
+            {
+                "wordId": 77,
+                "rank": 21,
+                "bare": "там",
+                "accented": "там",
+                "level": "A1",
+                "translations": [
+                    "there, later, by and by"
+                ],
+                "majorTranslations": [
+                    "there"
+                ],
+                "linked": true,
+                "pos": "other",
+                "props": {}
+            },
+            {
+                "wordId": 85,
+                "rank": 22,
+                "bare": "потом",
+                "accented": "пото'м",
+                "level": "A1",
+                "translations": [
+                    "afterwards, then, later on, later"
+                ],
+                "majorTranslations": [
+                    "afterwards"
+                ],
+                "linked": true,
+                "pos": "other",
+                "props": {}
+            },
+            {
+                "wordId": 87,
+                "rank": 23,
+                "bare": "очень",
+                "accented": "о'чень",
+                "level": "A1",
+                "translations": [
+                    "very, very much, greatly"
+                ],
+                "majorTranslations": [
+                    "very"
+                ],
+                "linked": true,
+                "pos": "adverb",
+                "props": {}
+            },
+            {
+                "wordId": 90,
+                "rank": 24,
+                "bare": "хотеть",
+                "accented": "хоте'ть",
+                "level": "A1",
+                "translations": [
+                    "to want",
+                    "to feel like",
+                    "to mean"
+                ],
+                "majorTranslations": [
+                    "to want",
+                    "to feel like",
+                    "to mean"
+                ],
+                "linked": true,
+                "pos": "verb",
+                "props": {}
+            },
+            {
+                "wordId": 93,
+                "rank": 25,
+                "bare": "без",
+                "accented": "без",
+                "level": "A1",
+                "translations": [
+                    "without",
+                    "to (time)"
+                ],
+                "majorTranslations": [
+                    "without",
+                    "to (time)"
+                ],
+                "linked": true,
+                "pos": "other",
+                "props": {}
+            },
+            {
+                "wordId": 100,
+                "rank": 26,
+                "bare": "дом",
+                "accented": "дом",
+                "level": "A1",
+                "translations": [
+                    "house, home, house-hold"
+                ],
+                "majorTranslations": [
+                    "house"
+                ],
+                "linked": true,
+                "pos": "noun",
+                "props": {}
+            },
+            {
+                "wordId": 101,
+                "rank": 27,
+                "bare": "тоже",
+                "accented": "то'же",
+                "level": "A1",
+                "translations": [
+                    "also, as well, too"
+                ],
+                "majorTranslations": [
+                    "also"
+                ],
+                "linked": true,
+                "pos": "other",
+                "props": {}
+            },
+            {
+                "wordId": 103,
+                "rank": 28,
+                "bare": "можно",
+                "accented": "мо'жно",
+                "level": "A1",
+                "translations": [
+                    "one can (it is possible)",
+                    "one may (it is allowed)"
+                ],
+                "majorTranslations": [
+                    "one can (it is possible)",
+                    "one may (it is allowed)"
+                ],
+                "linked": true,
+                "pos": "adverb",
+                "props": {}
+            },
+            {
+                "wordId": 108,
+                "rank": 29,
+                "bare": "здесь",
+                "accented": "здесь",
+                "level": "A1",
+                "translations": [
+                    "here, with us, in this country, about it, in it, at this point"
+                ],
+                "majorTranslations": [
+                    "here"
+                ],
+                "linked": true,
+                "pos": "other",
+                "props": {}
+            },
+            {
+                "wordId": 109,
+                "rank": 30,
+                "bare": "спросить",
+                "accented": "спроси'ть",
+                "level": "A1",
+                "translations": [
+                    "to ask, inquire, demand"
+                ],
+                "majorTranslations": [
+                    "to ask"
+                ],
+                "linked": true,
+                "pos": "verb",
+                "props": {}
+            },
+            {
+                "wordId": 117,
+                "rank": 31,
+                "bare": "жить",
+                "accented": "жить",
+                "level": "A1",
+                "translations": [
+                    "to live"
+                ],
+                "majorTranslations": [
+                    "to live"
+                ],
+                "linked": true,
+                "pos": "verb",
+                "props": {}
+            },
+            {
+                "wordId": 1717,
+                "rank": 32,
+                "bare": "октябрь",
+                "accented": "октя'брь",
+                "level": "A1",
+                "translations": [
+                    "October"
+                ],
+                "majorTranslations": [
+                    "October"
+                ],
+                "linked": true,
+                "pos": "noun",
+                "props": {}
+            },
+            {
+                "wordId": 132,
+                "rank": 33,
+                "bare": "работа",
+                "accented": "рабо'та",
+                "level": "A1",
+                "translations": [
+                    "work, working, job"
+                ],
+                "majorTranslations": [
+                    "work"
+                ],
+                "linked": true,
+                "pos": "noun",
+                "props": {}
+            },
+            {
+                "wordId": 139,
+                "rank": 34,
+                "bare": "понимать",
+                "accented": "понима'ть",
+                "level": "A1",
+                "translations": [
+                    "to understand, comprehend, realize"
+                ],
+                "majorTranslations": [
+                    "to understand"
+                ],
+                "linked": true,
+                "pos": "verb",
+                "props": {}
+            },
+            {
+                "wordId": 154,
+                "rank": 35,
+                "bare": "хорошо",
+                "accented": "хорошо'",
+                "level": "A1",
+                "translations": [
+                    "it is good, it is pleasant, well, good"
+                ],
+                "majorTranslations": [
+                    "it is good"
+                ],
+                "linked": true,
+                "pos": "adverb",
+                "props": {}
+            },
+            {
+                "wordId": 157,
+                "rank": 36,
+                "bare": "вода",
+                "accented": "вода'",
+                "level": "A1",
+                "translations": [
+                    "water"
+                ],
+                "majorTranslations": [
+                    "water"
+                ],
+                "linked": true,
+                "pos": "noun",
+                "props": {}
+            },
+            {
+                "wordId": 193,
+                "rank": 37,
+                "bare": "любить",
+                "accented": "люби'ть",
+                "level": "A1",
+                "translations": [
+                    "love"
+                ],
+                "majorTranslations": [
+                    "love"
+                ],
+                "linked": true,
+                "pos": "verb",
+                "props": {}
+            },
+            {
+                "wordId": 217,
+                "rank": 38,
+                "bare": "Россия",
+                "accented": "Росси'я",
+                "level": "A1",
+                "translations": [
+                    "Russia"
+                ],
+                "majorTranslations": [
+                    "Russia"
+                ],
+                "linked": true,
+                "pos": "noun",
+                "props": {}
+            },
+            {
+                "wordId": 228,
+                "rank": 39,
+                "bare": "маленький",
+                "accented": "ма'ленький",
+                "level": "A1",
+                "translations": [
+                    "little, small",
+                    "short",
+                    "trifling, petty"
+                ],
+                "majorTranslations": [
+                    "little",
+                    "short",
+                    "trifling"
+                ],
+                "linked": true,
+                "pos": "adjective",
+                "props": {}
+            },
+            {
+                "wordId": 234,
+                "rank": 40,
+                "bare": "сегодня",
+                "accented": "сего'дня",
+                "level": "A1",
+                "translations": [
+                    "today"
+                ],
+                "majorTranslations": [
+                    "today"
+                ],
+                "linked": true,
+                "pos": "adverb",
+                "props": {}
+            },
+            {
+                "wordId": 243,
+                "rank": 41,
+                "bare": "сколько",
+                "accented": "ско'лько",
+                "level": "A1",
+                "translations": [
+                    "how much, how many"
+                ],
+                "majorTranslations": [
+                    "how much"
+                ],
+                "linked": true,
+                "pos": "pronoun",
+                "props": {}
+            },
+            {
+                "wordId": 270,
+                "rank": 42,
+                "bare": "быстро",
+                "accented": "бы'стро",
+                "level": "A1",
+                "translations": [
+                    "fast, quickly, rapidly, with speed"
+                ],
+                "majorTranslations": [
+                    "fast"
+                ],
+                "linked": true,
+                "pos": "adverb",
+                "props": {}
+            },
+            {
+                "wordId": 334,
+                "rank": 43,
+                "bare": "девушка",
+                "accented": "де'вушка",
+                "level": "A1",
+                "translations": [
+                    "girl, young woman",
+                    "girlfriend",
+                    "miss (informal)"
+                ],
+                "majorTranslations": [
+                    "girl",
+                    "girlfriend",
+                    "miss (informal)"
+                ],
+                "linked": true,
+                "pos": "noun",
+                "props": {}
+            },
+            {
+                "wordId": 532,
+                "rank": 44,
+                "bare": "медленно",
+                "accented": "ме'дленно",
+                "level": "A1",
+                "translations": [
+                    "slowly"
+                ],
+                "majorTranslations": [
+                    "slowly"
+                ],
+                "linked": true,
+                "pos": "adverb",
+                "props": {}
+            },
+            {
+                "wordId": 573,
+                "rank": 45,
+                "bare": "купить",
+                "accented": "купи'ть",
+                "level": "A1",
+                "translations": [
+                    "buy, purchase"
+                ],
+                "majorTranslations": [
+                    "buy"
+                ],
+                "linked": true,
+                "pos": "verb",
+                "props": {}
+            },
+            {
+                "wordId": 587,
+                "rank": 46,
+                "bare": "рубль",
+                "accented": "рубль",
+                "level": "A1",
+                "translations": [
+                    "ruble"
+                ],
+                "majorTranslations": [
+                    "ruble"
+                ],
+                "linked": true,
+                "pos": "noun",
+                "props": {}
+            },
+            {
+                "wordId": 615,
+                "rank": 47,
+                "bare": "трудно",
+                "accented": "тру'дно",
+                "level": "A1",
+                "translations": [
+                    "difficultly"
+                ],
+                "majorTranslations": [
+                    "difficultly"
+                ],
+                "linked": true,
+                "pos": "adverb",
+                "props": {}
+            },
+            {
+                "wordId": 658,
+                "rank": 48,
+                "bare": "счёт",
+                "accented": "счёт",
+                "level": "A1",
+                "translations": [
+                    "bill",
+                    "check",
+                    "account",
+                    "score",
+                    "expense, due to, at the cost"
+                ],
+                "majorTranslations": [
+                    "bill",
+                    "check",
+                    "account",
+                    "score",
+                    "expense"
+                ],
+                "linked": true,
+                "pos": "noun",
+                "props": {}
+            },
+            {
+                "wordId": 721,
+                "rank": 49,
+                "bare": "помочь",
+                "accented": "помо'чь",
+                "level": "A1",
+                "translations": [
+                    "to help, to assist, to aid, to lend a hand"
+                ],
+                "majorTranslations": [
+                    "to help"
+                ],
+                "linked": true,
+                "pos": "verb",
+                "props": {}
+            },
+            {
+                "wordId": 763,
+                "rank": 50,
+                "bare": "чай",
+                "accented": "чай",
+                "level": "A1",
+                "translations": [
+                    "tea"
+                ],
+                "majorTranslations": [
+                    "tea"
+                ],
+                "linked": true,
+                "pos": "noun",
+                "props": {}
+            },
+            {
+                "wordId": 769,
+                "rank": 51,
+                "bare": "спасибо",
+                "accented": "спаси'бо",
+                "level": "A1",
+                "translations": [
+                    "thanks, thank you"
+                ],
+                "majorTranslations": [
+                    "thanks"
+                ],
+                "linked": true,
+                "pos": "other",
+                "props": {}
+            },
+            {
+                "wordId": 829,
+                "rank": 52,
+                "bare": "пожалуйста",
+                "accented": "пожа'луйста",
+                "level": "A1",
+                "translations": [
+                    "please",
+                    "you are welcome",
+                    "here you go"
+                ],
+                "majorTranslations": [
+                    "please",
+                    "you are welcome",
+                    "here you go"
+                ],
+                "linked": true,
+                "pos": "other",
+                "props": {}
+            },
+            {
+                "wordId": 884,
+                "rank": 53,
+                "bare": "правильно",
+                "accented": "пра'вильно",
+                "level": "A1",
+                "translations": [
+                    "right, rightly",
+                    "correctly, regularly",
+                    "properly"
+                ],
+                "majorTranslations": [
+                    "right",
+                    "correctly",
+                    "properly"
+                ],
+                "linked": true,
+                "pos": "adverb",
+                "props": {}
+            },
+            {
+                "wordId": 911,
+                "rank": 54,
+                "bare": "вино",
+                "accented": "вино'",
+                "level": "A1",
+                "translations": [
+                    "wine, liquor, spirits"
+                ],
+                "majorTranslations": [
+                    "wine"
+                ],
+                "linked": true,
+                "pos": "noun",
+                "props": {}
+            },
+            {
+                "wordId": 1355,
+                "rank": 55,
+                "bare": "ресторан",
+                "accented": "рестора'н",
+                "level": "A1",
+                "translations": [
+                    "restaurant"
+                ],
+                "majorTranslations": [
+                    "restaurant"
+                ],
+                "linked": true,
+                "pos": "noun",
+                "props": {}
+            },
+            {
+                "wordId": 1390,
+                "rank": 56,
+                "bare": "пиво",
+                "accented": "пи'во",
+                "level": "A1",
+                "translations": [
+                    "beer"
+                ],
+                "majorTranslations": [
+                    "beer"
+                ],
+                "linked": true,
+                "pos": "noun",
+                "props": {}
+            },
+            {
+                "wordId": 1495,
+                "rank": 57,
+                "bare": "стоить",
+                "accented": "сто'ить",
+                "level": "A1",
+                "translations": [
+                    "to cost",
+                    "worth, should"
+                ],
+                "majorTranslations": [
+                    "to cost",
+                    "worth"
+                ],
+                "linked": true,
+                "pos": "verb",
+                "props": {}
+            },
+            {
+                "wordId": 1579,
+                "rank": 58,
+                "bare": "кофе",
+                "accented": "ко'фе",
+                "level": "A1",
+                "translations": [
+                    "coffee"
+                ],
+                "majorTranslations": [
+                    "coffee"
+                ],
+                "linked": true,
+                "pos": "noun",
+                "props": {}
+            },
+            {
+                "wordId": 1662,
+                "rank": 59,
+                "bare": "гостиница",
+                "accented": "гости'ница",
+                "level": "A1",
+                "translations": [
+                    "hotel"
+                ],
+                "majorTranslations": [
+                    "hotel"
+                ],
+                "linked": true,
+                "pos": "noun",
+                "props": {}
+            },
+            {
+                "wordId": 2197,
+                "rank": 60,
+                "bare": "холодно",
+                "accented": "хо'лодно",
+                "level": "A1",
+                "translations": [
+                    "it is cold, coldly"
+                ],
+                "majorTranslations": [
+                    "it is cold"
+                ],
+                "linked": true,
+                "pos": "adverb",
+                "props": {}
+            },
+            {
+                "wordId": 2754,
+                "rank": 61,
+                "bare": "такси",
+                "accented": "такси'",
+                "level": "A1",
+                "translations": [
+                    "taxi"
+                ],
+                "majorTranslations": [
+                    "taxi"
+                ],
+                "linked": true,
+                "pos": "noun",
+                "props": {}
+            },
+            {
+                "wordId": 2839,
+                "rank": 62,
+                "bare": "туалет",
+                "accented": "туале'т",
+                "level": "A1",
+                "translations": [
+                    "toilet, lavatory, loo, bathroom, restroom",
+                    "dress, attire"
+                ],
+                "majorTranslations": [
+                    "toilet",
+                    "dress"
+                ],
+                "linked": true,
+                "pos": "noun",
+                "props": {}
+            },
+            {
+                "wordId": 2975,
+                "rank": 63,
+                "bare": "носок",
+                "accented": "носо'к",
+                "level": "A1",
+                "translations": [
+                    "sock",
+                    "toe (of a boot, shoe or sock)"
+                ],
+                "majorTranslations": [
+                    "sock",
+                    "toe (of a boot"
+                ],
+                "linked": true,
+                "pos": "noun",
+                "props": {}
+            },
+            {
+                "wordId": 3077,
+                "rank": 64,
+                "bare": "красиво",
+                "accented": "краси'во",
+                "level": "A1",
+                "translations": [
+                    "beautifully"
+                ],
+                "majorTranslations": [
+                    "beautifully"
+                ],
+                "linked": true,
+                "pos": "adverb",
+                "props": {}
+            },
+            {
+                "wordId": 3174,
+                "rank": 65,
+                "bare": "жарко",
+                "accented": "жа'рко",
+                "level": "A1",
+                "translations": [
+                    "it is hot, hotly"
+                ],
+                "majorTranslations": [
+                    "it is hot"
+                ],
+                "linked": true,
+                "pos": "adverb",
+                "props": {}
+            },
+            {
+                "wordId": 3390,
+                "rank": 66,
+                "bare": "свободно",
+                "accented": "свобо'дно",
+                "level": "A1",
+                "translations": [
+                    "freely",
+                    "easily",
+                    "fluently"
+                ],
+                "majorTranslations": [
+                    "freely",
+                    "easily",
+                    "fluently"
+                ],
+                "linked": true,
+                "pos": "adverb",
+                "props": {}
+            },
+            {
+                "wordId": 7411,
+                "rank": 67,
+                "bare": "вкусно",
+                "accented": "вку'сно",
+                "level": "A1",
+                "translations": [
+                    "tasty, delicious, palatable, savoury"
+                ],
+                "majorTranslations": [
+                    "tasty"
+                ],
+                "linked": true,
+                "pos": "adverb",
+                "props": {}
+            },
+            {
+                "wordId": 7583,
+                "rank": 68,
+                "bare": "бар",
+                "accented": "бар",
+                "level": "A1",
+                "translations": [
+                    "bar, snack-bar, sand-bar"
+                ],
+                "majorTranslations": [
+                    "bar"
+                ],
+                "linked": true,
+                "pos": "noun",
+                "props": {}
+            },
+            {
+                "wordId": 12953,
+                "rank": 69,
+                "bare": "супермаркет",
+                "accented": "суперма'ркет",
+                "level": "A1",
+                "translations": [
+                    "supermarket"
+                ],
+                "majorTranslations": [
+                    "supermarket"
+                ],
+                "linked": true,
+                "pos": "noun",
+                "props": {}
+            },
+            {
+                "wordId": 32405,
+                "rank": 70,
+                "bare": "по-русски",
+                "accented": "по-ру'сски",
+                "level": "A1",
+                "translations": [
+                    "in Russian, Russian"
+                ],
+                "majorTranslations": [
+                    "in Russian"
+                ],
+                "linked": true,
+                "pos": "other",
+                "props": {}
+            },
+            {
+                "wordId": 33002,
+                "rank": 71,
+                "bare": "здравствуйте",
+                "accented": "здра'вствуйте",
+                "level": "A1",
+                "translations": [
+                    "hello"
+                ],
+                "majorTranslations": [
+                    "hello"
+                ],
+                "linked": true,
+                "pos": "other",
+                "props": {}
+            },
+            {
+                "wordId": 50682,
+                "rank": 72,
+                "bare": "банкомат",
+                "accented": "банкома'т",
+                "level": "A1",
+                "translations": [
+                    "ATM, cash machine"
+                ],
+                "majorTranslations": [
+                    "ATM"
+                ],
+                "linked": true,
+                "pos": "noun",
+                "props": {}
+            },
+            {
+                "wordId": 52416,
+                "rank": 73,
+                "bare": "извините",
+                "accented": "извини'те",
+                "level": "A1",
+                "translations": [
+                    "sorry!"
+                ],
+                "majorTranslations": [
+                    "sorry!"
+                ],
+                "linked": true,
+                "pos": "other",
+                "props": {}
+            },
+            {
+                "wordId": 4,
+                "rank": 74,
+                "bare": "он",
+                "accented": "он",
+                "level": "A1",
+                "translations": [
+                    "he"
+                ],
+                "majorTranslations": [
+                    "he"
+                ],
+                "linked": true,
+                "pos": "pronoun",
+                "props": {}
+            },
+            {
+                "wordId": 6,
+                "rank": 75,
+                "bare": "я",
+                "accented": "я",
+                "level": "A1",
+                "translations": [
+                    "I, me, myself"
+                ],
+                "majorTranslations": [
+                    "I"
+                ],
+                "linked": true,
+                "pos": "pronoun",
+                "props": {}
+            },
+            {
+                "wordId": 15,
+                "rank": 76,
+                "bare": "она",
+                "accented": "она'",
+                "level": "A1",
+                "translations": [
+                    "she"
+                ],
+                "majorTranslations": [
+                    "she"
+                ],
+                "linked": true,
+                "pos": "pronoun",
+                "props": {}
+            },
+            {
+                "wordId": 18,
+                "rank": 77,
+                "bare": "они",
+                "accented": "они'",
+                "level": "A1",
+                "translations": [
+                    "they"
+                ],
+                "majorTranslations": [
+                    "they"
+                ],
+                "linked": true,
+                "pos": "pronoun",
+                "props": {}
+            },
+            {
+                "wordId": 22,
+                "rank": 78,
+                "bare": "мы",
+                "accented": "мы",
+                "level": "A1",
+                "translations": [
+                    "we"
+                ],
+                "majorTranslations": [
+                    "we"
+                ],
+                "linked": true,
+                "pos": "pronoun",
+                "props": {}
+            },
+            {
+                "wordId": 24,
+                "rank": 79,
+                "bare": "ты",
+                "accented": "ты",
+                "level": "A1",
+                "translations": [
+                    "you"
+                ],
+                "majorTranslations": [
+                    "you"
+                ],
+                "linked": true,
+                "pos": "pronoun",
+                "props": {}
+            },
+            {
+                "wordId": 25,
+                "rank": 80,
+                "bare": "вы",
+                "accented": "вы",
+                "level": "A1",
+                "translations": [
+                    "you (plural)",
+                    "you (formal)"
+                ],
+                "majorTranslations": [
+                    "you (plural)",
+                    "you (formal)"
+                ],
+                "linked": true,
+                "pos": "pronoun",
+                "props": {}
+            },
+            {
+                "wordId": 288,
+                "rank": 81,
+                "bare": "оно",
+                "accented": "оно'",
+                "level": "A1",
+                "translations": [
+                    "it"
+                ],
+                "majorTranslations": [
+                    "it"
+                ],
+                "linked": true,
+                "pos": "pronoun",
+                "props": {}
+            },
+            {
+                "wordId": 59737,
+                "rank": 82,
+                "bare": "до свидания",
+                "accented": "до свида'ния",
+                "level": "A1",
+                "translations": [
+                    "bye (formal)"
+                ],
+                "majorTranslations": [
+                    "bye (formal)"
+                ],
+                "linked": true,
+                "pos": "expression",
+                "props": {}
+            },
+            {
+                "wordId": 59774,
+                "rank": 83,
+                "bare": "зовут",
+                "accented": "зову'т",
+                "level": "A1",
+                "translations": [
+                    "to be called (= name is)"
+                ],
+                "majorTranslations": [
+                    "to be called (= name is)"
+                ],
+                "linked": true,
+                "pos": "other",
+                "props": {}
+            }
+        ]
+    },
+    "error": null
+}

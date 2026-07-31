@@ -1,0 +1,83 @@
+name: Build Android APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "android-app/**"
+      - ".github/workflows/build-apk.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  build-apk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install npm dependencies
+        working-directory: android-app
+        run: npm ci
+
+      - name: Sync web assets into the native project
+        working-directory: android-app
+        run: npx cap copy android
+
+      - name: Build debug APK
+        working-directory: android-app/android
+        run: |
+          set -o pipefail
+          chmod +x gradlew
+          ./gradlew assembleDebug 2>&1 | tee gradle.log
+
+      - name: Surface build errors as annotations
+        if: failure()
+        working-directory: android-app/android
+        run: grep -im 10 "error" gradle.log | sed 's/^/::error::/' || true
+
+      - name: Publish build log for debugging
+        if: failure()
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: build-log
+          name: Debug — latest failed Gradle log
+          prerelease: true
+          make_latest: false
+          files: android-app/android/gradle.log
+
+      - name: Rename APK
+        run: cp android-app/android/app/build/outputs/apk/debug/app-debug.apk Slovo-debug.apk
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Slovo-debug-apk
+          path: Slovo-debug.apk
+          if-no-files-found: error
+
+      # Stable public download URL (artifacts require a GitHub login; releases don't):
+      # https://github.com/<owner>/<repo>/releases/download/apk-latest/Slovo-debug.apk
+      - name: Publish APK to the apk-latest release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: apk-latest
+          name: Слово Android — latest debug APK
+          body: >
+            Debug-signed APK built from the latest android-app/ sources
+            (Android 7.0+ / API 24+). Download and open it on your phone
+            with "install unknown apps" enabled for whichever app you use
+            to open it (Files, browser, etc.) — no Play Store needed.
+          prerelease: true
+          make_latest: false
+          files: Slovo-debug.apk
